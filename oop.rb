@@ -4,17 +4,15 @@
 # it should have a method called "say" that returns whatever string is passed in, with "*~*" at the beginning and end of the string
 
 class Unicorn
-
+    #make attribute readers
+    attr_reader :name
+    attr_reader :color
   
     def initialize(name)
         @name = name
         @color = "silver"
     end
-
-    #make attribute readers
-    attr_reader :name
-    attr_reader :color
-    
+   
     def say(message)
       "*~* #{message} *~*"
     end  
@@ -34,17 +32,17 @@ puts leo.say("My name is #{leo.name}!")
 
 # create class
 class Vampire
+
+    # make attribute readers
+    attr_reader :name
+    attr_reader :pet
+    attr_reader :is_thirsty
   
     def initialize(name)
         @name = name
         @pet = "bat"
         @is_thirsty = true
     end
-
-    # make attribute readers
-    attr_reader :name
-    attr_reader :pet
-    attr_reader :is_thirsty
 
     def drink
         @is_thirsty = false
@@ -72,7 +70,13 @@ p sam.is_thirsty
 
 # create class
 class Dragon
-    
+ 
+     # make attribute readers
+     attr_reader :name
+     attr_reader :rider
+     attr_reader :color
+     attr_reader :is_hungry
+     attr_reader :eat_count   
   
     def initialize(name,rider,color)
         @name = name
@@ -81,13 +85,6 @@ class Dragon
         @is_hungry = true
         @eat_count = 4
     end
-
-    # make attribute readers
-    attr_reader :name
-    attr_reader :rider
-    attr_reader :color
-    attr_reader :is_hungry
-    attr_reader :eat_count
 
     def eat
         # each time dragon eats, eat_count decrements by 1 and prints out how many more times it needs to eat
@@ -138,16 +135,55 @@ june.eat
 # create class
 class Hobbit
 
-    def initialize(name,disposition)
-    
-    end
-
     # make attribute readers
-    attr_reader :
+    attr_reader :name, :disposition, :age
+    attr_reader :is_adult, :is_old, :has_ring
 
-
-    def celebrate_birthday
+    def initialize(name,disposition)
+        @name = name
+        @disposition = disposition
+        @age = 0
+        @is_adult = false
+        @is_old = false
+        #value of has_ring depends on the name 
+        @has_ring = 
+            if @name == "Frodo"
+                true
+            else
+                false
+            end 
     end
-
     
+    def celebrate_birthday
+        @age += 1
+        
+        # ***QUESTION*** 
+        # I tried to include ages over 33 and over 101 
+        # account for is_adult and is_old to be true if
+        # age is changed outside of the celebrate_birthday method
+        # but I realized is_adult and is_old will only turn true 
+        # if celebrate_birthday method is called...
+        
+
+        #changes is_adult to true when age reaches 33
+        if @age >= 33
+            @is_adult = true
+        end    
+        #changes is_old to true when age reaches 101
+        if @age >= 101
+            @is_old = true
+        end
+    end
 end
+
+frodo = Hobbit.new("Frodo","shy")
+(1...34).each do
+    frodo.celebrate_birthday
+end
+p frodo 
+
+bilbo = Hobbit.new("Bilbo","polite")
+(1...102).each do
+    bilbo.celebrate_birthday
+end
+p bilbo
